@@ -1,6 +1,7 @@
 require 'oystercard'
 
 describe Oystercard do
+
 	describe "#balance" do
 		it "responds to :balance" do
 			expect(subject).to respond_to(:balance)
@@ -25,4 +26,20 @@ describe Oystercard do
 			expect(subject.balance).to eq(2)
 		end
 	end
+
+	describe "# in-out journey" do
+
+		it "checks if you are in journey after touched in" do
+			subject.touch_in
+			expect(subject.in_journey?).to be_truthy
+		end
+
+		it "check if you are not in journey after touch out" do
+			subject.touch_in
+			subject.touch_out
+			expect(subject.in_journey?).to be_falsey 
+		end
+
+	end
+
 end
