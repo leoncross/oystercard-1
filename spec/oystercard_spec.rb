@@ -24,11 +24,18 @@ describe Oystercard do
 	end
 
 	describe "#deduct" do
+
 		it "deducts the correct fair from balance" do
 			subject.top_up(5)
-			subject.deduct(3)
-			expect(subject.balance).to eq(2)
+			subject.touch_out
+			expect(subject.balance).to eq(4)
 		end
+
+		it "make sure the journey has been paid for" do
+			subject.top_up(5)
+			expect{ subject.touch_out }.to change{ subject.balance }.by -Oystercard::MINIMUM_FARE
+		end
+
 	end
 
 	describe "# in-out journey" do
@@ -43,12 +50,11 @@ describe Oystercard do
 			subject.touch_out
 			expect(subject).to_not be_in_journey
 		end
-	end
-
-	describe "# journey checker" do
 		it "ensures the card has sufficient balance for journey" do
 			subject.top_up(0)
 			expect{ (subject.touch_in) }.to raise_error "Insufficient funds for journey"
 		end
 	end
+
+	
 end
