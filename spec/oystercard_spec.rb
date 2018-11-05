@@ -31,13 +31,13 @@ describe Oystercard do
 
 		it "checks if you are in journey after touched in" do
 			subject.touch_in
-			expect(subject.in_journey?).to be_truthy
+			expect(subject).to be_in_journey
 		end
 
 		it "check if you are not in journey after touch out" do
 			subject.touch_in
 			subject.touch_out
-			expect(subject.in_journey?).to be_falsey 
+			expect(subject).to_not be_in_journey
 		end
 
 	end
