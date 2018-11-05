@@ -12,7 +12,7 @@ class Oystercard
   	fail "Maximum balance of #{MAXIMUM_BALANCE} exceeded" if (@balance + amount > MAXIMUM_BALANCE)
     @balance += amount.to_i
   end
-  
+
   def deduct(amount)
     @balance -= amount
   end
@@ -23,9 +23,7 @@ class Oystercard
   end
 
   def touch_out
- 		if @in_use == true
-  		@in_use = false
-  	end
+    @in_use = false if @in_use == true
 	end
 
   def in_journey?

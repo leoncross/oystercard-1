@@ -21,7 +21,6 @@ describe Oystercard do
 		it "checks the minimum fair of the journey" do
 			expect(Oystercard::MINIMUM_FARE).to eq 1
 		end
-
 	end
 
 	describe "#deduct" do
@@ -33,13 +32,11 @@ describe Oystercard do
 	end
 
 	describe "# in-out journey" do
-
 		it "checks if you are in journey after touched in" do
 			subject.top_up(5)
 			subject.touch_in
 			expect(subject).to be_in_journey
 		end
-
 		it "check if you are not in journey after touch out" do
 			subject.top_up(5)
 			subject.touch_in
@@ -54,5 +51,4 @@ describe Oystercard do
 			expect{ (subject.touch_in) }.to raise_error "Insufficient funds for journey"
 		end
 	end
-
 end
