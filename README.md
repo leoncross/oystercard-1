@@ -1,1 +1,3 @@
-# oystercard-1
+# Oyster Card Pairing Challenge
+
+Gems: RSpec and Rubocop
