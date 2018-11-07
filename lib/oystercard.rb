@@ -22,7 +22,6 @@ class Oystercard
 
   def touch_out(station)
     deduct(MINIMUM_FARE)
-
 	end
 
   def in_journey?
