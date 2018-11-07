@@ -1,6 +1,7 @@
 require 'oystercard'
 
 describe Oystercard do
+	let(:station) {'station'}
 
 	describe "#balance" do
 		it "responds to :balance" do
@@ -37,7 +38,7 @@ describe Oystercard do
 	describe "#in-out" do
 		before (:each) do
 			subject.top_up(5)
-			subject.touch_in
+			subject.touch_in(station)
 		end
 		it "checks if you are in journey after touched in" do
 			expect(subject).to be_in_journey
@@ -48,9 +49,31 @@ describe Oystercard do
 		end
 	end
 
-	describe "#insufficient funds" do
+	describe "#touch-in" do
 		it "checks that error is raised when insufficient funds on card" do
-			expect{ (subject.touch_in) }.to raise_error "Insufficient funds for journey"
+			expect{ (subject.touch_in(station)) }.to raise_error "Insufficient funds for journey"
+		end
+
+		it "stores the station you touch in at" do
+			subject.top_up(5)
+			expect(subject).to respond_to(:touch_in)
+	end
+
+		it "ensures it accepts 1 argument" do
+			subject.top_up(5)
+			expect(subject).to respond_to(:touch_in).with(1).argument
+		end
+	end
+
+	describe "#entry station" do
+		it "starts its life as nil" do
+			expect(subject.entry_station).to eq nil
+		end
+
+		it "after touch_in, it stores the station you tapped into" do
+			subject.top_up(5)
+			subject.touch_in(station)
+			expect(subject.entry_station).to eq station
 		end
 	end
 end
