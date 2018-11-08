@@ -17,13 +17,13 @@ class Oystercard
 
   def touch_in(station)
     fail "Insufficient funds for journey" if @balance < Journey::MINIMUM_FARE
-    deduct(@journey.fare) if @journey.current_journey.has_key?(:entry_station)
+    deduct if @journey.current_journey.has_key?(:entry_station)
     @journey.touch_in(station)
   end
 
   def touch_out(station)
     @journey.touch_out(station)
-    deduct(@journey.fare)
+    deduct
 	end
 
   def in_journey?
@@ -31,8 +31,8 @@ class Oystercard
   end
 
 private
-  def deduct(amount)
-    @balance -= amount
+  def deduct
+    @balance -= @journey.fare
   end
 
 
