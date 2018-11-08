@@ -38,11 +38,6 @@ describe Oystercard do
 			subject.top_up(5)
 			subject.touch_in(station)
 		end
-
-		it "checks if you are not in journey after touching out" do
-			subject.touch_out(station)
-			expect(subject).to_not be_in_journey
-		end
 	end
 
 	describe "#touch-in" do
