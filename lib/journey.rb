@@ -1,7 +1,9 @@
 class Journey
   attr_reader :current_journey, :journeys
+
   MINIMUM_FARE = 1
   PENALTY = 6
+
   def initialize
     @journeys = []
     @current_journey = {}
@@ -20,11 +22,12 @@ class Journey
   end
 
   def fare
+    @current_journey = {}
     !@penalty ? PENALTY : MINIMUM_FARE
   end
 
   def in_journey?
-    !!@current_journey.has_key?(:entry_station)
+    current_journey.has_key?(:entry_station)
   end
 
 end

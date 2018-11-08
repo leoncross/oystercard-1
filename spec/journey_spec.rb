@@ -49,14 +49,4 @@ describe Journey do
     subject.touch_out(station)
     expect(subject.fare).to eq Journey::PENALTY
   end
-
-  it "expects complete? to show a completed journey" do
-    subject.touch_out(station)
-    expect(subject.complete?).to be_truthy
-  end
-
-  it "expects complete? to show a completed journey" do
-    subject.touch_in(station)
-    expect(subject.complete?).to be_falsy
-  end
 end

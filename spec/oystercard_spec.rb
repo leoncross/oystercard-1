@@ -17,21 +17,19 @@ describe Oystercard do
 			maximum_balance = Oystercard::MAXIMUM_BALANCE
 			expect{ subject.top_up(maximum_balance+1) }.to raise_error "Maximum balance of #{maximum_balance} exceeded"
 		end
-		it "checks the minimum fair of the journey" do
-			expect(Oystercard::MINIMUM_FARE).to eq 1
-		end
 	end
 
 	describe "#deduct" do
 		before (:each) do
-			subject.top_up(5)
+			subject.top_up(10)
 		end
 		it "deducts the correct fare from balance" do
 			subject.touch_out(station)
 			expect(subject.balance).to eq(4)
 		end
 		it "makes sure the journey has been paid for" do
-			expect{ subject.touch_out(station) }.to change{ subject.balance }.by -Oystercard::MINIMUM_FARE
+			subject.touch_in(station)
+			expect{ subject.touch_out(station) }.to change{ subject.balance }.by -Journey::MINIMUM_FARE
 		end
 	end
 
