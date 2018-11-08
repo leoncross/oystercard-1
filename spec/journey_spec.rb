@@ -1,7 +1,7 @@
 require 'journey'
 
 describe Journey do
-  let(:station) {'station'}
+  let(:station) { double :station, zone: 1}
 
 
   it "checks if you are in journey after touched in" do
@@ -37,16 +37,26 @@ describe Journey do
   it "completes a full fare and returns 1" do
     subject.touch_in(station)
     subject.touch_out(station)
-    expect(subject.fare).to eq 1
+    expect(subject.fare).to eq Journey::MINIMUM_FARE
   end
 
   it "completes a penalty (in) fare and returns 6" do
     subject.touch_in(station)
-    expect(subject.fare).to eq 6
+    expect(subject.fare).to eq Journey::PENALTY
   end
 
   it "completes a penalty (out) fare and returns 6" do
     subject.touch_out(station)
-    expect(subject.fare).to eq 6
+    expect(subject.fare).to eq Journey::PENALTY
+  end
+
+  it "expects complete? to show a completed journey" do
+    subject.touch_out(station)
+    expect(subject.complete?).to be_truthy
+  end
+
+  it "expects complete? to show a completed journey" do
+    subject.touch_in(station)
+    expect(subject.complete?).to be_falsy
   end
 end
