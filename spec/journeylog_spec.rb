@@ -1,7 +1,7 @@
-require 'journey_log'
+require 'journeylog'
 
 describe JourneyLog do
 
-  
+
 
 end

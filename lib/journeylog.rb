@@ -2,7 +2,8 @@ class JourneyLog
 
   attr_reader :journey
 
-  def initialize #need to inject a class here??????
+  def initialize
+    @journey = Journey.new
 
   end
 

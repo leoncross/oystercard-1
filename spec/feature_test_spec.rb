@@ -1,12 +1,13 @@
 require 'oystercard'
 
 
-describe Oystercard do
+describe "features of programme" do
 
   let(:station) {'station'}
 
 
     it "completes a full cycle" do
+
       card = Oystercard.new
       card.top_up(10)
       card.touch_in(station)
